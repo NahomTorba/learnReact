@@ -19,7 +19,7 @@ function Home(){
                 setError("Failed to load movies...")
             }
             finally{
-                setLoading(false )
+                setLoading(false)
             }
         }
         loadPopularMovies();
@@ -28,6 +28,7 @@ function Home(){
  const handleSearch = (e) => {
     e.preventDefault()
     alert(searchQuery)
+
  }
 
  return( 
@@ -42,11 +43,15 @@ function Home(){
             <button type="submit" className="search-button">Search</button>
         </form>
 
-        <div className="movies-grid">
-            {movies.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-            ))}
-        </div>
+        {error && <div className="error-message">{error}</div>}
+
+        {loading ? (<div className="loading">Loading...</div>) :
+            (<div className="movies-grid">
+                {movies.map((movie) => (
+                    <MovieCard movie={movie} key={movie.id} />
+                ))}
+            </div>)
+        }
     </div>
  );
 }
