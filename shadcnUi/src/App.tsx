@@ -1,10 +1,17 @@
-import { Button } from "@/components/ui/button"
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import Navbar from "./components/layout/Navbar"
+import Favorites from "./pages/Favorites"
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
+    </>
   )
 }
 
