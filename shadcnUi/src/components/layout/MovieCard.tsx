@@ -5,16 +5,32 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import type { Movie } from "@/services/api"
+import { useMovieContext } from "@/contexts/MovieContex"
+import type { MouseEvent } from "react"
 
 type MovieCardProps = {
   movie: Movie
 }
 
 export default function MovieCard({ movie }: MovieCardProps) {
-  const onFavoriteClick = (e: React.MouseEvent) => {
+  const { addToFavorites, removeFromFavorites, isFavorite } = useMovieContext()
+  const isMovieFavorite = isFavorite(movie.id)
+
+  const onFavoriteClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    // TODO: Implement favorite functionality
-    console.log("Favorite clicked for", movie.title)
+    e.stopPropagation()
+
+    if (isMovieFavorite) {
+      removeFromFavorites(movie.id)
+    } else {
+      // Convert API Movie type to Context Movie type (only include fields context expects)
+      addToFavorites({
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        release_date: movie.release_date,
+      })
+    }
   }
 
   return (
@@ -28,11 +44,15 @@ export default function MovieCard({ movie }: MovieCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <p className="text-white text-sm line-clamp-3 mb-4">{movie.overview}</p>
           <Button
-            variant="secondary"
-            className="w-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
+            variant={isMovieFavorite ? "destructive" : "secondary"}
+            className={`w-full transition ${
+              isMovieFavorite
+                ? "bg-red-600 hover:bg-red-700 text-white"
+                : "bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
+            }`}
             onClick={onFavoriteClick}
           >
-            Add to Favorites
+            {isMovieFavorite ? "Remove from Favorites" : "Add to Favorites"}
           </Button>
         </div>
       </div>
@@ -47,10 +67,6 @@ export default function MovieCard({ movie }: MovieCardProps) {
           </span>
         </div>
       </CardHeader>
-
-      {/* <CardFooter className="p-4 pt-0">
-        <Button className="w-full" variant="outline">View Details</Button>
-      </CardFooter> */}
     </Card>
   )
 }
