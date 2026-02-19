@@ -6,14 +6,14 @@ import { Routes, Route } from 'react-router-dom';
 import { MovieProvider } from './contexts/MovieContext';
 
 function App() {
-  return ( 
+  return (
     <MovieProvider>
-      <NavBar/>
+      <NavBar />
       <main className="main-content" >
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/favorites' element={<Favorites/>} />
-      </Routes>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/favorites' element={<Favorites />} />
+        </Routes>
       </main>
     </MovieProvider>
   );
