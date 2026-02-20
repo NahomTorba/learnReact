@@ -45,11 +45,10 @@ export default function MovieCard({ movie }: MovieCardProps) {
           <p className="text-white text-sm line-clamp-3 mb-4">{movie.overview}</p>
           <Button
             variant={isMovieFavorite ? "destructive" : "secondary"}
-            className={`w-full transition ${
-              isMovieFavorite
-                ? "bg-red-600 hover:bg-red-700 text-white"
-                : "bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
-            }`}
+            className={`w-full transition ${isMovieFavorite
+              ? "bg-red-600 hover:bg-red-700 text-white"
+              : "bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
+              }`}
             onClick={onFavoriteClick}
           >
             {isMovieFavorite ? "Remove from Favorites" : "Add to Favorites"}

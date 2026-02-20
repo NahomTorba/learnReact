@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -10,7 +10,6 @@ export default function Navbar() {
     <nav className="border-b px-6 py-4">
       <NavigationMenu>
         <NavigationMenuList>
-          
           <NavigationMenuItem>
             <Link to="/">Home</Link>
           </NavigationMenuItem>
@@ -18,7 +17,6 @@ export default function Navbar() {
           <NavigationMenuItem>
             <Link className="p-4" to="/favorites">Favorites</Link>
           </NavigationMenuItem>
-
         </NavigationMenuList>
       </NavigationMenu>
     </nav>
